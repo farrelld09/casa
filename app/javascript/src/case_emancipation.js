@@ -62,6 +62,28 @@ function saveCheckState (action, checkItemId) {
     })
 }
 
+function manageTogglerText($parent) {
+  // TODO
+  const category = $parent
+  const categoryCollapseIcon = category.find('category-collapse-icon')
+}
+
+function openChildren($parent) {
+  // TODO
+}
+
+function closeChildren($parent) {
+  // TODO
+}
+
+function deselectChildren($parent) {
+  // TODO
+}
+
+function selectMainInput($parent) {
+  // TODO
+}
+
 $('document').ready(() => {
   if (!(/casa_cases\/\d+\/emancipation/.test(window.location.pathname))) {
     return
