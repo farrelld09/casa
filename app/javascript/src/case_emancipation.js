@@ -67,14 +67,14 @@ function manageTogglerText($parent) {
   const category = $parent
   const categoryCollapseIcon = category.find("category-collapse-icon")
 
-  let collapseIcon = categoryCollapseIcon.text()
-  categoryCollapseIcon.text( collapseIcon == "+" ? "-" : "+")
+  // let collapseIcon = categoryCollapseIcon.text()
+  // categoryCollapseIcon.text( collapseIcon == "+" ? "-" : "+")
 
-  // if($parent.attr("data-is-open") === "true") {
-  //   categoryCollapseIcon.text() = "-"
-  // } else if ($parent.attr("data-is-open") === "false") {
-  //   categoryCollapseIcon.text() = "+"
-  // }
+  if ($parent.attr("data-is-open") === "true") {
+    categoryCollapseIcon.text("-")
+  } else if ($parent.attr("data-is-open") === "false") {
+    categoryCollapseIcon.text("+")
+  }
 }
 
 function openChildren($parent) {
@@ -139,7 +139,7 @@ $("document").ready(() => {
         doneCallback
 
       if (categoryCheckboxChecked) {
-        collapseIcon = "+"
+        // collapseIcon = "+"
         doneCallback = () => {
           closeChildren(category)
 
@@ -147,7 +147,7 @@ $("document").ready(() => {
         }
         saveAction = "delete_category"
       } else {
-        collapseIcon = "−"
+        // collapseIcon = "−"
         doneCallback = () => {
           openChildren(category)
         }
