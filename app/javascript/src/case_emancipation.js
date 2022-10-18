@@ -67,36 +67,32 @@ function manageTogglerText($parent) {
   const category = $parent
   const categoryCollapseIcon = category.find("category-collapse-icon")
 
-  // let collapseIcon = categoryCollapseIcon.text()
-  // categoryCollapseIcon.text( collapseIcon == "+" ? "-" : "+")
-
   if ($parent.attr("data-is-open") === "true") {
-    categoryCollapseIcon.text("-")
+    return categoryCollapseIcon.text("-")
   } else if ($parent.attr("data-is-open") === "false") {
-    categoryCollapseIcon.text("+")
+    return categoryCollapseIcon.text("+")
   }
 }
 
 function openChildren($parent) {
-  // TODO
   const category = $parent
   const categoryOptionsContainer = category.siblings(".category-options")
+  const categoryCollapseIcon = category.find("category-collapse-icon")
 
   categoryOptionsContainer.show()
   $parent.attr("data-is-open", "true")
 }
 
 function closeChildren($parent) {
-  // TODO
   const category = $parent
   const categoryOptionsContainer = category.siblings(".category-options")
+  const categoryCollapseIcon = category.find("category-collapse-icon")
 
   categoryOptionsContainer.hide()
   $parent.attr("data-is-open", "false")
 }
 
 function deselectChildren($parent) {
-  // TODO
   const category = $parent
   const categoryOptionsContainer = category.siblings(".category-options")
 
@@ -108,10 +104,6 @@ function deselectChildren($parent) {
     checkbox.prop("checked", false)
     emancipationPage.notifier.notify("Unchecked " + checkbox.next().text(), "info")
   })
-}
-
-function selectMainInput($parent) {
-  // TODO
 }
 
 $("document").ready(() => {
@@ -142,7 +134,7 @@ $("document").ready(() => {
         // collapseIcon = "+"
         doneCallback = () => {
           closeChildren(category)
-
+          manageTogglerText(category)
           deselectChildren(category)
         }
         saveAction = "delete_category"
@@ -150,6 +142,7 @@ $("document").ready(() => {
         // collapseIcon = "−"
         doneCallback = () => {
           openChildren(category)
+          manageTogglerText(category)
         }
         saveAction = "add_category"
       }
@@ -158,7 +151,8 @@ $("document").ready(() => {
         .done(function () {
           doneCallback()
           categoryCheckbox.prop("checked", !categoryCheckboxChecked)
-          categoryCollapseIcon.text(collapseIcon)
+          // categoryCollapseIcon.text(collapseIcon)
+          manageTogglerText(category)
         })
         .always(function () {
           category.data("disabled", false)
