@@ -1,11 +1,11 @@
 /* eslint-env jquery */
 /* global $ */
 
-const Notifier = require("./async_notifier")
-const TypeChecker = require("./type_checker")
+const Notifier = require('./async_notifier')
+const TypeChecker = require('./type_checker')
 
 const emancipationPage = {
-  savePath: window.location.pathname + "/save"
+  savePath: window.location.pathname + '/save'
 }
 
 // Called when an async operation completes. May show notifications describing how the operation completed
@@ -33,11 +33,11 @@ function resolveAsyncOperation (error) {
 //  @throws   {RangeError} if optionId is negative
 function saveCheckState (action, checkItemId) {
   // Input check
-  if (typeof checkItemId === "string") {
+  if (typeof checkItemId === 'string') {
     checkItemId = parseInt(checkItemId)
   }
 
-  TypeChecker.checkPositiveInteger(checkItemId, "checkItemId")
+  TypeChecker.checkPositiveInteger(checkItemId, 'checkItemId')
 
   emancipationPage.notifier.startAsyncOperation()
 
@@ -49,10 +49,10 @@ function saveCheckState (action, checkItemId) {
     .then(function (response, textStatus, jqXHR) {
       if (response.error) {
         return $.Deferred().reject(jqXHR, textStatus, response.error)
-      } else if (response === "success") {
+      } else if (response === 'success') {
         resolveAsyncOperation()
       } else {
-        resolveAsyncOperation("Unknown response")
+        resolveAsyncOperation('Unknown response')
       }
 
       return response
@@ -62,64 +62,64 @@ function saveCheckState (action, checkItemId) {
     })
 }
 
-function manageTogglerText($parent) {
+function manageTogglerText ($parent) {
   const category = $parent
-  const categoryCollapseIcon = category.find(".category-collapse-icon")
+  const categoryCollapseIcon = category.find('.category-collapse-icon')
 
-  if (category.attr("data-is-open") === "true") {
-    categoryCollapseIcon.text("-")
-  } else if (category.attr("data-is-open") === "false") {
-    categoryCollapseIcon.text("+")
+  if (category.attr('data-is-open') === 'true') {
+    categoryCollapseIcon.text('-')
+  } else if (category.attr('data-is-open') === 'false') {
+    categoryCollapseIcon.text('+')
   }
 }
 
-function openChildren($parent) {
+function openChildren ($parent) {
   const category = $parent
-  const categoryOptionsContainer = category.siblings(".category-options")
+  const categoryOptionsContainer = category.siblings('.category-options')
 
   categoryOptionsContainer.show()
-  $parent.attr("data-is-open", "true")
+  $parent.attr('data-is-open', 'true')
 }
 
-function closeChildren($parent) {
+function closeChildren ($parent) {
   const category = $parent
-  const categoryOptionsContainer = category.siblings(".category-options")
+  const categoryOptionsContainer = category.siblings('.category-options')
 
   categoryOptionsContainer.hide()
-  $parent.attr("data-is-open", "false")
+  $parent.attr('data-is-open', 'false')
 }
 
-function deselectChildren($parent) {
+function deselectChildren ($parent) {
   const category = $parent
-  const categoryOptionsContainer = category.siblings(".category-options")
+  const categoryOptionsContainer = category.siblings('.category-options')
 
   categoryOptionsContainer.children().filter(function () {
-    return $(this).find("input").prop("checked")
+    return $(this).find('input').prop('checked')
   }).each(function () {
-    const checkbox = $(this).find("input")
+    const checkbox = $(this).find('input')
 
-    checkbox.prop("checked", false)
-    emancipationPage.notifier.notify("Unchecked " + checkbox.next().text(), "info")
+    checkbox.prop('checked', false)
+    emancipationPage.notifier.notify('Unchecked ' + checkbox.next().text(), 'info')
   })
 }
 
-$("document").ready(() => {
+$('document').ready(() => {
   if (!(/casa_cases\/\d+\/emancipation/.test(window.location.pathname))) {
     return
   }
 
-  const asyncNotificationsElement = $("#async-notifications")
+  const asyncNotificationsElement = $('#async-notifications')
   emancipationPage.notifier = new Notifier(asyncNotificationsElement)
 
-  $(".emancipation-category").click(function () {
+  $('.emancipation-category').click(function () {
     const category = $(this)
-    const categoryCheckbox = category.find(".emancipation-category-check-box")
-    const categoryCheckboxChecked = categoryCheckbox.is(":checked")
+    const categoryCheckbox = category.find('.emancipation-category-check-box')
+    const categoryCheckboxChecked = categoryCheckbox.is(':checked')
 
-    if (!category.data("disabled")) {
-      category.data("disabled", true)
-      category.addClass("disabled")
-      categoryCheckbox.prop("disabled", "disabled")
+    if (!category.data('disabled')) {
+      category.data('disabled', true)
+      category.addClass('disabled')
+      categoryCheckbox.prop('disabled', 'disabled')
 
       let saveAction,
         doneCallback
@@ -130,39 +130,39 @@ $("document").ready(() => {
           manageTogglerText(category)
           deselectChildren(category)
         }
-        saveAction = "delete_category"
+        saveAction = 'delete_category'
       } else {
         doneCallback = () => {
           openChildren(category)
           manageTogglerText(category)
         }
-        saveAction = "add_category"
+        saveAction = 'add_category'
       }
 
       saveCheckState(saveAction, categoryCheckbox.val())
         .done(function () {
           doneCallback()
-          categoryCheckbox.prop("checked", !categoryCheckboxChecked)
+          categoryCheckbox.prop('checked', !categoryCheckboxChecked)
           manageTogglerText(category)
         })
         .always(function () {
-          category.data("disabled", false)
-          category.removeClass("disabled")
-          categoryCheckbox.prop("disabled", false)
+          category.data('disabled', false)
+          category.removeClass('disabled')
+          categoryCheckbox.prop('disabled', false)
         })
     }
   })
 
-  $(".check-item").click(function () {
+  $('.check-item').click(function () {
     const checkComponent = $(this)
-    const checkElement = checkComponent.find("input")
+    const checkElement = checkComponent.find('input')
 
-    if (checkComponent.data("disabled")) {
+    if (checkComponent.data('disabled')) {
       return
     }
 
-    if (checkElement.attr("type") === "radio") {
-      if (checkElement.prop("checked")) {
+    if (checkElement.attr('type') === 'radio') {
+      if (checkElement.prop('checked')) {
         return
       }
 
@@ -170,44 +170,44 @@ $("document").ready(() => {
 
       radioButtons.each(function () {
         const radioComponent = $(this)
-        const radioInput = radioComponent.find("input")
+        const radioInput = radioComponent.find('input')
 
-        radioComponent.data("disabled", true)
-        radioComponent.addClass("disabled")
-        radioInput.prop("disabled", "disabled")
+        radioComponent.data('disabled', true)
+        radioComponent.addClass('disabled')
+        radioInput.prop('disabled', 'disabled')
       })
 
-      saveCheckState("set_option", checkElement.val())
+      saveCheckState('set_option', checkElement.val())
         .done(function () {
-          checkElement.prop("checked", true)
+          checkElement.prop('checked', true)
           radioButtons.each(function () {
             const radioComponent = $(this)
-            const radioInput = radioComponent.find("input")
+            const radioInput = radioComponent.find('input')
 
-            radioComponent.data("disabled", false)
-            radioComponent.removeClass("disabled")
-            radioInput.prop("disabled", false)
+            radioComponent.data('disabled', false)
+            radioComponent.removeClass('disabled')
+            radioInput.prop('disabled', false)
           })
         })
     } else { // Expecting type=checkbox
-      checkComponent.data("disabled", true)
-      checkComponent.addClass("disabled")
-      checkElement.prop("disabled", "disabled")
+      checkComponent.data('disabled', true)
+      checkComponent.addClass('disabled')
+      checkElement.prop('disabled', 'disabled')
 
-      const originallyChecked = checkElement.prop("checked")
+      const originallyChecked = checkElement.prop('checked')
       let asyncCall
 
       if (!originallyChecked) {
-        asyncCall = saveCheckState("add_option", checkElement.val())
+        asyncCall = saveCheckState('add_option', checkElement.val())
       } else {
-        asyncCall = saveCheckState("delete_option", checkElement.val())
+        asyncCall = saveCheckState('delete_option', checkElement.val())
       }
 
       asyncCall.done(function () {
-        checkComponent.data("disabled", false)
-        checkComponent.removeClass("disabled")
-        checkElement.prop("checked", !originallyChecked)
-        checkElement.prop("disabled", false)
+        checkComponent.data('disabled', false)
+        checkComponent.removeClass('disabled')
+        checkElement.prop('checked', !originallyChecked)
+        checkElement.prop('disabled', false)
       })
     }
   })
