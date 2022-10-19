@@ -63,21 +63,19 @@ function saveCheckState (action, checkItemId) {
 }
 
 function manageTogglerText($parent) {
-  // TODO
   const category = $parent
-  const categoryCollapseIcon = category.find("category-collapse-icon")
+  const categoryCollapseIcon = category.find(".category-collapse-icon")
 
-  if ($parent.attr("data-is-open") === "true") {
-    return categoryCollapseIcon.text("-")
-  } else if ($parent.attr("data-is-open") === "false") {
-    return categoryCollapseIcon.text("+")
+  if (category.attr("data-is-open") === "true") {
+    categoryCollapseIcon.text("-")
+  } else if (category.attr("data-is-open") === "false") {
+    categoryCollapseIcon.text("+")
   }
 }
 
 function openChildren($parent) {
   const category = $parent
   const categoryOptionsContainer = category.siblings(".category-options")
-  const categoryCollapseIcon = category.find("category-collapse-icon")
 
   categoryOptionsContainer.show()
   $parent.attr("data-is-open", "true")
@@ -86,7 +84,6 @@ function openChildren($parent) {
 function closeChildren($parent) {
   const category = $parent
   const categoryOptionsContainer = category.siblings(".category-options")
-  const categoryCollapseIcon = category.find("category-collapse-icon")
 
   categoryOptionsContainer.hide()
   $parent.attr("data-is-open", "false")
@@ -117,9 +114,7 @@ $("document").ready(() => {
   $(".emancipation-category").click(function () {
     const category = $(this)
     const categoryCheckbox = category.find(".emancipation-category-check-box")
-    const categoryCollapseIcon = category.find("category-collapse-icon")
     const categoryCheckboxChecked = categoryCheckbox.is(":checked")
-    const categoryOptionsContainer = category.siblings(".category-options")
 
     if (!category.data("disabled")) {
       category.data("disabled", true)
@@ -127,11 +122,9 @@ $("document").ready(() => {
       categoryCheckbox.prop("disabled", "disabled")
 
       let saveAction,
-        collapseIcon,
         doneCallback
 
       if (categoryCheckboxChecked) {
-        // collapseIcon = "+"
         doneCallback = () => {
           closeChildren(category)
           manageTogglerText(category)
@@ -139,7 +132,6 @@ $("document").ready(() => {
         }
         saveAction = "delete_category"
       } else {
-        // collapseIcon = "−"
         doneCallback = () => {
           openChildren(category)
           manageTogglerText(category)
@@ -151,7 +143,6 @@ $("document").ready(() => {
         .done(function () {
           doneCallback()
           categoryCheckbox.prop("checked", !categoryCheckboxChecked)
-          // categoryCollapseIcon.text(collapseIcon)
           manageTogglerText(category)
         })
         .always(function () {
