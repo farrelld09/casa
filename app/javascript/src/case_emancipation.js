@@ -62,36 +62,32 @@ function saveCheckState (action, checkItemId) {
     })
 }
 
-function manageTogglerText ($parent) {
-  const category = $parent
-  const categoryCollapseIcon = category.find('.category-collapse-icon')
+export function manageTogglerText ($parent) {
+  const categoryCollapseIcon = $parent.find('.category-collapse-icon')
 
-  if (category.attr('data-is-open') === 'true') {
-    categoryCollapseIcon.text('-')
-  } else if (category.attr('data-is-open') === 'false') {
+  if ($parent.attr('data-is-open') === 'true') {
+    categoryCollapseIcon.text('–')
+  } else if ($parent.attr('data-is-open') === 'false') {
     categoryCollapseIcon.text('+')
   }
 }
 
-function openChildren ($parent) {
-  const category = $parent
-  const categoryOptionsContainer = category.siblings('.category-options')
+export function openChildren ($parent) {
+  const categoryOptionsContainer = $parent.siblings('.category-options')
 
   categoryOptionsContainer.show()
-  category.attr('data-is-open', 'true')
+  $parent.attr('data-is-open', 'true')
 }
 
-function closeChildren ($parent) {
-  const category = $parent
-  const categoryOptionsContainer = category.siblings('.category-options')
+export function closeChildren ($parent) {
+  const categoryOptionsContainer = $parent.siblings('.category-options')
 
   categoryOptionsContainer.hide()
-  category.attr('data-is-open', 'false')
+  $parent.attr('data-is-open', 'false')
 }
 
-function deselectChildren ($parent) {
-  const category = $parent
-  const categoryOptionsContainer = category.siblings('.category-options')
+export function deselectChildren ($parent) {
+  const categoryOptionsContainer = $parent.siblings('.category-options')
 
   categoryOptionsContainer.children().filter(function () {
     return $(this).find('input').prop('checked')
