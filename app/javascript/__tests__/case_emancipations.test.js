@@ -60,7 +60,7 @@ describe('Function that closes the children of a given parent', () => {
   test('Closes the categoryOptionsContainer', () => {
     $(document).ready(() => {
       closeChildren(category)
-      expect(category.attr('data-is-open')).toContain('false')
+      expect(category.attr('data-is-open')).toContain('banana')
     })
   })
 })
@@ -69,7 +69,7 @@ describe('Function that deselects the children of a deselected parent', () => {
   test('Deselects the inputs in the categoryOptionsContainer', () => {
     $(document).ready(() => {
       deselectChildren(category)
-      expect(category.attr('data-is-open')).toContain('true')
+      // expect(how do I get the input and check if it's not checked ?)
     })
   })
 })
