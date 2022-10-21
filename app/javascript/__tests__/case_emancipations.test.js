@@ -31,17 +31,23 @@ beforeEach(() => {
   </div>
   `
 
-  category = $('.emancipation-category')
-  categoryCollapseIcon = category.find('.category-collapse-icon')
+  // category = $('.emancipation-category')
+  // categoryCollapseIcon = $('.category-collapse-icon')
+  // categoryOptionsContainer = category.find('.category-options')
+
+  category = document.querySelector('.emancipation-category')
+  categoryCollapseIcon = document.querySelector('.category-collapse-icon')
   categoryOptionsContainer = document.querySelector('.category-options')
 })
 
 describe('Function that changes the text of the Toggler based on the state of the parent', () => {
   test('Changes the toggler text to -', () => {
-    category.attr('data-is-open', 'false')
+    $(document).ready(() => {
+      category.attr('data-is-open', 'false')
 
-    manageTogglerText($('.emancipation-category'))
-    expect(categoryCollapseIcon.innerHTML).toContain('-')
+      manageTogglerText(category)
+      expect(categoryCollapseIcon.text).toContain('+')
+    })
   })
 })
 
