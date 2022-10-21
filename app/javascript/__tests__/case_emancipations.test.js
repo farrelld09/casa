@@ -31,10 +31,6 @@ beforeEach(() => {
   </div>
   `
 
-  // category = $('.emancipation-category')
-  // categoryCollapseIcon = $('.category-collapse-icon')
-  // categoryOptionsContainer = category.find('.category-options')
-
   category = document.querySelector('.emancipation-category')
   categoryCollapseIcon = document.querySelector('.category-collapse-icon')
   categoryOptionsContainer = document.querySelector('.category-options')
@@ -51,11 +47,29 @@ describe('Function that changes the text of the Toggler based on the state of th
   })
 })
 
-// describe('Function that opens the children of a given parent', () => {
-//   test('Opens the categoryOptionsContainer', () => {
-//     const category = '.emancipation-category'
+describe('Function that opens the children of a given parent', () => {
+  test('Opens the categoryOptionsContainer', () => {
+    $(document).ready(() => {
+      openChildren(category)
+      expect(category.attr('data-is-open')).toContain('true')
+    })
+  })
+})
 
-//     openChildren(category)
-//     expect(category.attr('data-is-open')).toContain('true')
-//   })
-// })
+describe('Function that closes the children of a given parent', () => {
+  test('Closes the categoryOptionsContainer', () => {
+    $(document).ready(() => {
+      closeChildren(category)
+      expect(category.attr('data-is-open')).toContain('false')
+    })
+  })
+})
+
+describe('Function that deselects the children of a deselected parent', () => {
+  test('Deselects the inputs in the categoryOptionsContainer', () => {
+    $(document).ready(() => {
+      deselectChildren(category)
+      expect(category.attr('data-is-open')).toContain('true')
+    })
+  })
+})
