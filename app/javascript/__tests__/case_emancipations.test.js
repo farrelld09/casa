@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { openChildren, closeChildren, deselectChildren, manageTogglerText } from "../src/case_emancipation";
+import { openChildren, closeChildren, deselectChildren, manageTogglerText } from '../src/case_emancipation'
 
 require('jest')
 
