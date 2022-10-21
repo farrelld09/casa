@@ -78,7 +78,7 @@ function openChildren ($parent) {
   const categoryOptionsContainer = category.siblings('.category-options')
 
   categoryOptionsContainer.show()
-  $parent.attr('data-is-open', 'true')
+  category.attr('data-is-open', 'true')
 }
 
 function closeChildren ($parent) {
@@ -86,7 +86,7 @@ function closeChildren ($parent) {
   const categoryOptionsContainer = category.siblings('.category-options')
 
   categoryOptionsContainer.hide()
-  $parent.attr('data-is-open', 'false')
+  category.attr('data-is-open', 'false')
 }
 
 function deselectChildren ($parent) {
