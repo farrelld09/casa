@@ -100,11 +100,9 @@ export function deselectChildren(parent) {
 }
 
 $('document').ready(() => {
-  console.log('primeiro')
   if (!(/casa_cases\/[A-Z\-0-9]+\/emancipation/.test(window.location.pathname))) {
     return
   }
-  console.log('segundo')
 
   const asyncNotificationsElement = $('#async-notifications')
   emancipationPage.notifier = new Notifier(asyncNotificationsElement)
