@@ -7,7 +7,6 @@ let category
 let categoryCollapseIcon
 let categoryOptionsContainer
 
-// how do I set this up?
 beforeEach(() => {
   document.body.innerHTML = `
   <div class="card card-container">
@@ -42,7 +41,7 @@ describe('Function that changes the text of the Toggler based on the state of th
       category.attr('data-is-open', 'false')
 
       manageTogglerText(category)
-      expect(categoryCollapseIcon.text).toContain('+')
+      expect(categoryCollapseIcon.text).toEqual('+')
     })
   })
 })
@@ -51,7 +50,7 @@ describe('Function that opens the children of a given parent', () => {
   test('Opens the categoryOptionsContainer', () => {
     $(document).ready(() => {
       openChildren(category)
-      expect(category.attr('data-is-open')).toContain('true')
+      expect(category.attr('data-is-open')).toEqual('true')
     })
   })
 })
@@ -60,7 +59,7 @@ describe('Function that closes the children of a given parent', () => {
   test('Closes the categoryOptionsContainer', () => {
     $(document).ready(() => {
       closeChildren(category)
-      expect(category.attr('data-is-open')).toContain('banana')
+      expect(category.attr('data-is-open')).toEqual('banana')
     })
   })
 })
