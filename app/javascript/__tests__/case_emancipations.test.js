@@ -47,14 +47,14 @@ describe('Function that changes the text of the Toggler based on the state of th
 describe('Function that opens the children of a given parent', () => {
   test('Opens the categoryOptionsContainer', () => {
       openChildren(category)
-      expect(category.attr('data-is-open')).toEqual('true')
+      expect(category.data('is-open')).toEqual(true)
     })
 })
 
 describe('Function that closes the children of a given parent', () => {
   test('Closes the categoryOptionsContainer', () => {
       closeChildren(category)
-      expect(category.attr('data-is-open')).toEqual('false')
+      expect(category.data('is-open')).toEqual(false)
     })
 })
 
