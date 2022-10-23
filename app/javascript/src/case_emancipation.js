@@ -62,7 +62,7 @@ function saveCheckState (action, checkItemId) {
     })
 }
 
-export function manageTogglerText (parent) {
+export function manageTogglerText(parent) {
   const categoryCollapseIcon = parent.find('.category-collapse-icon')
 
   if (parent.attr('data-is-open') === 'true') {
@@ -72,21 +72,21 @@ export function manageTogglerText (parent) {
   }
 }
 
-export function openChildren (parent) {
+export function openChildren(parent) {
   const categoryOptionsContainer = parent.siblings('.category-options')
 
   categoryOptionsContainer.show()
   parent.attr('data-is-open', 'true')
 }
 
-export function closeChildren (parent) {
+export function closeChildren(parent) {
   const categoryOptionsContainer = parent.siblings('.category-options')
 
   categoryOptionsContainer.hide()
   parent.attr('data-is-open', 'false')
 }
 
-export function deselectChildren (parent) {
+export function deselectChildren(parent) {
   const categoryOptionsContainer = parent.siblings('.category-options')
 
   categoryOptionsContainer.children().filter(function () {
@@ -100,14 +100,16 @@ export function deselectChildren (parent) {
 }
 
 $('document').ready(() => {
-  if (!(/casa_cases\/\d+\/emancipation/.test(window.location.pathname))) {
+  console.log('primeiro')
+  if (!(/casa_cases\/[A-Z\-0-9]+\/emancipation/.test(window.location.pathname))) {
     return
   }
+  console.log('segundo')
 
   const asyncNotificationsElement = $('#async-notifications')
   emancipationPage.notifier = new Notifier(asyncNotificationsElement)
 
-  $('.emancipation-category').click(function () {
+  $('.emancipation-category').on('click', function () {
     const category = $(this)
     const categoryCheckbox = category.find('.emancipation-category-check-box')
     const categoryCheckboxChecked = categoryCheckbox.is(':checked')
@@ -148,6 +150,7 @@ $('document').ready(() => {
         })
     }
   })
+
 
   $('.check-item').click(function () {
     const checkComponent = $(this)
