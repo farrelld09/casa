@@ -54,13 +54,13 @@ describe('Function that opens the children of a given parent', () => {
 describe('Function that closes the children of a given parent', () => {
   test('Closes the categoryOptionsContainer', () => {
       closeChildren(category)
-      expect(category.attr('data-is-open')).toEqual('banana')
+      expect(category.attr('data-is-open')).toEqual('false')
     })
 })
 
-describe('Function that deselects the children of a deselected parent', () => {
-  test('Deselects the inputs in the categoryOptionsContainer', () => {
-      deselectChildren(category)
-      // expect(how do I get the input and check if it's not checked ?)
-    })
-})
+// describe('Function that deselects the children of a deselected parent', () => {
+//   test('Deselects the inputs in the categoryOptionsContainer', () => {
+//       deselectChildren(category)
+//       // expect(how do I get the input and check if it's not checked ?)
+//     })
+// })
