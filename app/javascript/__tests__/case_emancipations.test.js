@@ -6,7 +6,7 @@ require('jest')
 let category
 let categoryCollapseIcon
 let categoryOptionsContainer
-let checkItem
+let checkBox
 
 beforeEach(() => {
   document.body.innerHTML = `
@@ -22,8 +22,8 @@ beforeEach(() => {
             class="category-options"
             style="display: none;">
               <div class="check-item">
-                <input type="checkbox" id="O1" class="emancipation-option-check-box" value="1">
-              <label>With Friend</label>
+                <input type="checkbox" id="O1" class="emancipation-option-check-box" value="1" checked>
+                <label>With Friend</label>
               </div>
           </div>
         </div>
@@ -34,7 +34,7 @@ beforeEach(() => {
   category = $('.emancipation-category')
   categoryCollapseIcon = $('.category-collapse-icon')
   categoryOptionsContainer = $('.category-options')
-  checkItem = $('.check-item')
+  checkBox = $('.emancipation-option-check-box')
 })
 
 describe('Function that changes the text of the Toggler based on the state of the parent', () => {
@@ -63,6 +63,8 @@ describe('Function that closes the children of a given parent', () => {
 describe('Function that deselects the children of a deselected parent', () => {
   test('Deselects the inputs in the categoryOptionsContainer', () => {
       deselectChildren(category)
-      expect(checkItem).is(':checked').toEqual(false)
+      expect(checkBox).is('checked').toEqual(false)
+      // expect(checkBox.hasAttribute('checked')).toBe(false)
+      // expect(checkBox.prop('checked')).toBe(false)
     })
 })
