@@ -2,14 +2,28 @@
 import { openChildren, closeChildren, deselectChildren, manageTogglerText } from '../src/case_emancipation'
 
 require('jest')
+const Notifier = require('../src/async_notifier.js')
 
 let category
 let categoryCollapseIcon
 let categoryOptionsContainer
 let checkBox
 
+let asyncNotificationsElement
+let notifier
+let emancipationPage
+
+
 beforeEach(() => {
   document.body.innerHTML = `
+  <div id="async-notifications">
+    <div id="async-waiting-indicator" style="display: none">
+      Saving <div class="load-spinner"></div>
+    </div>
+    <div id="async-success-indicator" class="async-success-indicator" style="display: none">
+      Saved
+    </div>
+  </div>
   <div class="card card-container">
     <div class="card-body">
         <div>
@@ -35,6 +49,12 @@ beforeEach(() => {
   categoryCollapseIcon = $('.category-collapse-icon')
   categoryOptionsContainer = $('.category-options')
   checkBox = $('.emancipation-option-check-box')
+
+  asyncNotificationsElement = $('#async-notifications')
+  notifier = new Notifier(asyncNotificationsElement)
+  emancipationPage = {
+    savePath: window.location.pathname + '/save'
+  }
 })
 
 describe('Function that changes the text of the Toggler based on the state of the parent', () => {
@@ -62,9 +82,9 @@ describe('Function that closes the children of a given parent', () => {
 
 describe('Function that deselects the children of a deselected parent', () => {
   test('Deselects the inputs in the categoryOptionsContainer', () => {
-      deselectChildren(category)
-      expect(checkBox).is('checked').toEqual(false)
-      // expect(checkBox.hasAttribute('checked')).toBe(false)
-      // expect(checkBox.prop('checked')).toBe(false)
+    deselectChildren(category)
+    expect(checkBox).is('checked').toEqual(false)
+    // expect(checkBox.hasAttribute('checked')).toBe(false)
+    // expect(checkBox.prop('checked')).toBe(false)
     })
 })
